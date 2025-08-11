@@ -14,7 +14,7 @@ const tourStops = [
       "Special Features: Silent study areas, group collaboration rooms",
       "Collection: Over 500,000 books and digital resources",
     ],
-    coordinates: [40.7128, -74.006], // Example coordinates (NYC)
+    coordinates: [-1.3095223341989337, 36.814028736977974], // Strathmore University Library
   },
   {
     title: "Student Center",
@@ -30,7 +30,7 @@ const tourStops = [
       "Services: Bookstore, post office, student government",
       "Recreation: Game room, TV lounge, study areas",
     ],
-    coordinates: [40.713, -74.0055],
+    coordinates: [-1.3099844780401626, 36.81315465232008], // Strathmore Student Center
   },
   {
     title: "Management Science Building",
@@ -46,7 +46,7 @@ const tourStops = [
       "Programs: Management Science, Data Analytics, Operations Research",
       "Research: Quantitative analysis and decision-making projects",
     ],
-    coordinates: [40.7125, -74.0065],
+    coordinates: [-1.310692482211766, 36.814323765813384], // Management Science Building
   },
   {
     title: "Sports Complex",
@@ -62,7 +62,7 @@ const tourStops = [
       "Sports: 15 varsity teams and intramural programs",
       "Fitness: Modern equipment and group fitness classes",
     ],
-    coordinates: [40.7135, -74.005],
+    coordinates: [-1.3107261041306382, 36.80880592348452], // Strathmore Sports Complex
   },
   {
     title: "Business School",
@@ -86,7 +86,7 @@ const tourStops = [
       "Features: Modern lecture halls, case study rooms, career center",
       "Partnerships: Strong industry connections and internship programs",
     ],
-    coordinates: [40.712, -74.007],
+    coordinates: [-1.3100319531890738, 36.812658213858555], // Strathmore Business School
   },
 ];
 
@@ -265,10 +265,10 @@ function goToStop(stopIndex) {
 
 // Initialize interactive map
 function initializeMap() {
-  // Use a default center point (can be customized to your campus location)
-  const campusCenter = [40.7128, -74.006];
+  // Strathmore University coordinates (Nairobi, Kenya)
+  const campusCenter = [-1.3070, 36.8107];
 
-  map = L.map("campus-map").setView(campusCenter, 16);
+  map = L.map("campus-map").setView(campusCenter, 17);
 
   // Add tile layer (OpenStreetMap)
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
