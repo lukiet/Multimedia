@@ -81,12 +81,11 @@ body {
     gap: 3rem;
     align-items: center;
     min-height: 600px;
-    background-image: url('/Images/bg1.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
-    background-color: #000000a1;
+    background-color: #f8f9fa;
 }
 
 .hero::before {
