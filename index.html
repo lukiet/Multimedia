@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Campus Tour</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>Campus Virtual Tour</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#tour" class="nav-link">Tour</a></li>
+                <li><a href="#map" class="nav-link">Map</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Welcome to Our Campus</h2>
+            <p>Experience our beautiful campus through an interactive virtual tour</p>
+            <button class="cta-button" onclick="startTour()">Start Tour</button>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/800x400/4a90e2/ffffff?text=Campus+Overview" alt="Campus Overview" id="hero-img">
+        </div>
+    </section>
+
+    <!-- Tour Control Panel -->
+    <section id="tour" class="tour-section">
+        <div class="tour-controls">
+            <h3>Campus Tour</h3>
+            <div class="stop-selector">
+                <button class="stop-btn active" data-stop="0">Library</button>
+                <button class="stop-btn" data-stop="1">Student Center</button>
+                <button class="stop-btn" data-stop="2">Science Building</button>
+                <button class="stop-btn" data-stop="3">Athletics Center</button>
+                <button class="stop-btn" data-stop="4">Dormitories</button>
+            </div>
+        </div>
+
+        <!-- Tour Display Area -->
+        <div class="tour-display">
+            <div class="tour-content">
+                <!-- Image Gallery -->
+                <div class="image-gallery">
+                    <div class="main-image">
+                        <img id="main-tour-image" src="https://via.placeholder.com/600x400/5cb85c/ffffff?text=Library" alt="Tour Stop">
+                    </div>
+                    <div class="thumbnail-gallery">
+                        <img class="thumbnail active" src="https://via.placeholder.com/100x75/5cb85c/ffffff?text=Lib1" alt="Library 1" onclick="changeImage(this.src)">
+                        <img class="thumbnail" src="https://via.placeholder.com/100x75/5cb85c/ffffff?text=Lib2" alt="Library 2" onclick="changeImage(this.src)">
+                        <img class="thumbnail" src="https://via.placeholder.com/100x75/5cb85c/ffffff?text=Lib3" alt="Library 3" onclick="changeImage(this.src)">
+                    </div>
+                </div>
+
+                <!-- Information Panel -->
+                <div class="info-panel">
+                    <h4 id="stop-title">University Library</h4>
+                    <p id="stop-description">Our state-of-the-art library features over 500,000 books, digital resources, study spaces, and research facilities. Open 24/7 during exam periods.</p>
+                    
+                    <!-- Audio Controls -->
+                    <div class="audio-controls">
+                        <h5>Audio Narration</h5>
+                        <audio id="tour-audio" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="audio-info">
+                            <span id="audio-title">Library Tour Narration</span>
+                        </div>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div class="additional-info">
+                        <h5>Quick Facts</h5>
+                        <ul id="quick-facts">
+                            <li>Hours: 24/7 during exams, 6 AM - 2 AM regular semester</li>
+                            <li>Floors: 5 levels of study and research space</li>
+                            <li>Special Features: Silent study areas, group collaboration rooms</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="tour-navigation">
+            <button class="nav-btn" id="prev-btn" onclick="previousStop()">⬅ Previous</button>
+            <span class="stop-indicator">
+                <span id="current-stop">1</span> of <span id="total-stops">5</span>
+            </span>
+            <button class="nav-btn" id="next-btn" onclick="nextStop()">Next ➡</button>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section id="map" class="map-section">
+        <div class="map-container">
+            <h3>Campus Map</h3>
+            <div id="campus-map" class="map"></div>
+            <div class="map-legend">
+                <h4>Legend</h4>
+                <div class="legend-item">
+                    <span class="marker library"></span> Library
+                </div>
+                <div class="legend-item">
+                    <span class="marker student-center"></span> Student Center
+                </div>
+                <div class="legend-item">
+                    <span class="marker science"></span> Science Building
+                </div>
+                <div class="legend-item">
+                    <span class="marker athletics"></span> Athletics Center
+                </div>
+                <div class="legend-item">
+                    <span class="marker dorms"></span> Dormitories
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h3>About This Tour</h3>
+            <p>This virtual campus tour showcases the main facilities and highlights of our university. Each stop includes high-quality photos, detailed descriptions, and audio narrations to give you a comprehensive view of campus life.</p>
+            <div class="features">
+                <div class="feature">
+                    <h4>📸 Photo Galleries</h4>
+                    <p>Multiple high-resolution images for each location</p>
+                </div>
+                <div class="feature">
+                    <h4>🎵 Audio Narration</h4>
+                    <p>Professional voice-over describing each location</p>
+                </div>
+                <div class="feature">
+                    <h4>🗺️ Interactive Map</h4>
+                    <p>Navigate through campus with our interactive map</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Campus Virtual Tour. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
