@@ -22,7 +22,7 @@ const tourStops = [
       "The heart of campus life featuring dining options, student services, meeting rooms, and recreational facilities. A hub for social and academic activities.",
     images: ["/Images/stchd.jpeg", "/Images/stc4.jpg", "/Images/stcb.jpeg"],
     thumbnails: ["/Images/stchd.jpeg", "/Images/stc4.jpg", "/Images/stcb.jpeg"],
-    audioFile: "/Audio/",
+    audioFile: "/Audio/stc.ogg",
     audioTitle: "Student Center Tour Narration",
     facts: [
       "Hours: 7 AM - 11 PM daily",
@@ -38,7 +38,7 @@ const tourStops = [
       "Modern laboratories and classrooms equipped with cutting-edge technology for management science, data analytics, and research programs.",
     images: ["/Images/msb.jpg", "/Images/msb2.jpeg", "/Images/msb2.jpg"],
     thumbnails: ["/Images/msb.jpg", "/Images/msb2.jpeg", "/Images/msb2.jpg"],
-    audioFile: "/Audio/management-science.ogg",
+    audioFile: "/Audio/ms.ogg",
     audioTitle: "Management Science Building Tour Narration",
     facts: [
       "Labs: 15 computer labs and data analytics facilities",
@@ -54,7 +54,7 @@ const tourStops = [
       "Complete fitness and sports facility including gymnasium, swimming pool, fitness center, and outdoor fields for all athletic programs.",
     images: ["/Images/sc.jpeg", "/Images/sc1.jpg", "/Images/sc2.jpg"],
     thumbnails: ["/Images/sc.jpeg", "/Images/sc1.jpg", "/Images/sc2.jpg"],
-    audioFile: "/Audio/sports-complex.ogg",
+    audioFile: "/Audio/sc.ogg",
     audioTitle: "Sports Complex Tour Narration",
     facts: [
       "Facilities: Gymnasium, pool, fitness center, outdoor fields",
@@ -78,7 +78,7 @@ const tourStops = [
       "/Images/biz1.jpg",
       "/Images/biz.jpeg",
     ],
-    audioFile: "/Audio/business-school.ogg",
+    audioFile: "/Audio/biz.ogg",
     audioTitle: "Business School Tour Narration",
     facts: [
       "Programs: MBA, Bachelor's in Business Administration, Finance",
