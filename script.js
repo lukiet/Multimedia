@@ -4,14 +4,14 @@ const tourStops = [
         title: "University Library",
         description: "Our state-of-the-art library features over 500,000 books, digital resources, study spaces, and research facilities. Open 24/7 during exam periods.",
         images: [
-            "https://via.placeholder.com/600x400/e74c3c/ffffff?text=Library+Main",
-            "https://via.placeholder.com/600x400/c0392b/ffffff?text=Library+Reading+Room",
-            "https://via.placeholder.com/600x400/e67e22/ffffff?text=Library+Study+Area"
+            "/Images/lib.jpeg",
+            "/Images/lib_reading_room.jpeg",
+            "/Images/lib_study_area.jpeg"
         ],
         thumbnails: [
-            "https://via.placeholder.com/100x75/e74c3c/ffffff?text=Lib1",
-            "https://via.placeholder.com/100x75/c0392b/ffffff?text=Lib2",
-            "https://via.placeholder.com/100x75/e67e22/ffffff?text=Lib3"
+            "/Images/lib1.jpeg",
+            "/Images/lib2.jpeg",
+            "/Images/lib3.jpeg"
         ],
         audioFile: "#", // Placeholder for audio file
         audioTitle: "Library Tour Narration",
