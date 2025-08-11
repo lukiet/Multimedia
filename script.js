@@ -6,7 +6,7 @@ const tourStops = [
       "Our state-of-the-art library features over 500,000 books, digital resources, study spaces, and research facilities. Open 24/7 during exam periods.",
     images: ["/Images/lib2.jpg", "/Images/lib3.jpg", "/Images/lib4.webp"],
     thumbnails: ["/Images/lib2.jpg", "/Images/lib3.jpg", "/Images/lib4.webp"],
-    audioFile: "", // No audio file
+    audioFile: "/Audio/lib.ogg",
     audioTitle: "Library Tour Narration",
     facts: [
       "Hours: 24/7 during exams, 6 AM - 2 AM regular semester",
@@ -22,7 +22,7 @@ const tourStops = [
       "The heart of campus life featuring dining options, student services, meeting rooms, and recreational facilities. A hub for social and academic activities.",
     images: ["/Images/stchd.jpeg", "/Images/stc4.jpg", "/Images/stcb.jpeg"],
     thumbnails: ["/Images/stchd.jpeg", "/Images/stc4.jpg", "/Images/stcb.jpeg"],
-    audioFile: "",
+    audioFile: "/Audio/",
     audioTitle: "Student Center Tour Narration",
     facts: [
       "Hours: 7 AM - 11 PM daily",
@@ -38,7 +38,7 @@ const tourStops = [
       "Modern laboratories and classrooms equipped with cutting-edge technology for management science, data analytics, and research programs.",
     images: ["/Images/msb.jpg", "/Images/msb2.jpeg", "/Images/msb2.jpg"],
     thumbnails: ["/Images/msb.jpg", "/Images/msb2.jpeg", "/Images/msb2.jpg"],
-    audioFile: "",
+    audioFile: "/Audio/management-science.ogg",
     audioTitle: "Management Science Building Tour Narration",
     facts: [
       "Labs: 15 computer labs and data analytics facilities",
@@ -53,8 +53,8 @@ const tourStops = [
     description:
       "Complete fitness and sports facility including gymnasium, swimming pool, fitness center, and outdoor fields for all athletic programs.",
     images: ["/Images/sc.jpeg", "/Images/sc1.jpg", "/Images/sc2.jpg"],
-    thumbnails: ["/Images/sc.jpg", "/Images/sc1.jpg", "/Images/sc2.jpg"],
-    audioFile: "",
+    thumbnails: ["/Images/sc.jpeg", "/Images/sc1.jpg", "/Images/sc2.jpg"],
+    audioFile: "/Audio/sports-complex.ogg",
     audioTitle: "Sports Complex Tour Narration",
     facts: [
       "Facilities: Gymnasium, pool, fitness center, outdoor fields",
@@ -78,7 +78,7 @@ const tourStops = [
       "/Images/biz1.jpg",
       "/Images/biz.jpeg",
     ],
-    audioFile: "",
+    audioFile: "/Audio/business-school.ogg",
     audioTitle: "Business School Tour Narration",
     facts: [
       "Programs: MBA, Bachelor's in Business Administration, Finance",
@@ -161,13 +161,27 @@ function loadTourStop(stopIndex) {
   // Update audio
   const audioElement = document.getElementById("tour-audio");
   const audioInfo = document.getElementById("audio-title");
+  const audioControls = document.querySelector(".audio-controls");
   
   if (stop.audioFile && stop.audioFile !== "") {
     audioElement.src = stop.audioFile;
     audioElement.style.display = "block";
+    audioControls.style.display = "block";
     audioInfo.textContent = stop.audioTitle;
+    
+    // Add multiple source formats for better browser compatibility
+    audioElement.innerHTML = `
+      <source src="${stop.audioFile}" type="audio/ogg">
+      <source src="${stop.audioFile.replace('.ogg', '.mp3')}" type="audio/mpeg">
+      <source src="${stop.audioFile.replace('.ogg', '.wav')}" type="audio/wav">
+      Your browser does not support the audio element.
+    `;
+    
+    // Load the audio
+    audioElement.load();
   } else {
     audioElement.style.display = "none";
+    audioControls.style.display = "none";
     audioInfo.textContent = "Audio narration not available for this location";
   }
 
@@ -388,16 +402,39 @@ document.addEventListener("keydown", function (e) {
 // Audio control enhancements
 function setupAudioControls() {
   const audioElement = document.getElementById("tour-audio");
+  const audioInfo = document.getElementById("audio-title");
 
   audioElement.addEventListener("loadedmetadata", function () {
-    console.log(
-      "Audio loaded for: " + document.getElementById("audio-title").textContent
-    );
+    console.log("Audio loaded for: " + audioInfo.textContent);
+    audioInfo.textContent = audioInfo.textContent + " (Ready to play)";
   });
 
   audioElement.addEventListener("error", function () {
     console.log("Audio file not available for this tour stop");
-    // You could show a message to the user here
+    audioInfo.textContent = "Audio file could not be loaded";
+    audioElement.style.display = "none";
+  });
+
+  audioElement.addEventListener("loadstart", function () {
+    audioInfo.textContent = audioInfo.textContent.replace(" (Ready to play)", "") + " (Loading...)";
+  });
+
+  audioElement.addEventListener("canplay", function () {
+    audioInfo.textContent = audioInfo.textContent.replace(" (Loading...)", "") + " (Ready to play)";
+  });
+
+  // Add play/pause event listeners for better user feedback
+  audioElement.addEventListener("play", function () {
+    console.log("Audio started playing");
+  });
+
+  audioElement.addEventListener("pause", function () {
+    console.log("Audio paused");
+  });
+
+  audioElement.addEventListener("ended", function () {
+    console.log("Audio finished playing");
+    audioInfo.textContent = audioInfo.textContent.replace(" (Ready to play)", "") + " (Completed)";
   });
 }
 
