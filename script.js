@@ -6,7 +6,7 @@ const tourStops = [
       "Our state-of-the-art library features over 500,000 books, digital resources, study spaces, and research facilities. Open 24/7 during exam periods.",
     images: ["/Images/lib2.jpg", "/Images/lib3.jpg", "/Images/lib4.webp"],
     thumbnails: ["/Images/lib2.jpg", "/Images/lib3.jpg", "/Images/lib4.webp"],
-    audioFile: "#", // Placeholder for audio file
+    audioFile: "", // No audio file
     audioTitle: "Library Tour Narration",
     facts: [
       "Hours: 24/7 during exams, 6 AM - 2 AM regular semester",
@@ -22,7 +22,7 @@ const tourStops = [
       "The heart of campus life featuring dining options, student services, meeting rooms, and recreational facilities. A hub for social and academic activities.",
     images: ["/Images/stchd.jpeg", "/Images/stc4.jpg", "/Images/stcb.jpeg"],
     thumbnails: ["/Images/stchd.jpeg", "/Images/stc4.jpg", "/Images/stcb.jpeg"],
-    audioFile: "#",
+    audioFile: "",
     audioTitle: "Student Center Tour Narration",
     facts: [
       "Hours: 7 AM - 11 PM daily",
@@ -38,7 +38,7 @@ const tourStops = [
       "Modern laboratories and classrooms equipped with cutting-edge technology for management science, data analytics, and research programs.",
     images: ["/Images/msb.jpg", "/Images/msb2.jpeg", "/Images/msb2.jpg"],
     thumbnails: ["/Images/msb.jpg", "/Images/msb2.jpeg", "/Images/msb2.jpg"],
-    audioFile: "#",
+    audioFile: "",
     audioTitle: "Management Science Building Tour Narration",
     facts: [
       "Labs: 15 computer labs and data analytics facilities",
@@ -54,7 +54,7 @@ const tourStops = [
       "Complete fitness and sports facility including gymnasium, swimming pool, fitness center, and outdoor fields for all athletic programs.",
     images: ["/Images/sc.jpeg", "/Images/sc1.jpg", "/Images/sc2.jpg"],
     thumbnails: ["/Images/sc.jpg", "/Images/sc1.jpg", "/Images/sc2.jpg"],
-    audioFile: "#",
+    audioFile: "",
     audioTitle: "Sports Complex Tour Narration",
     facts: [
       "Facilities: Gymnasium, pool, fitness center, outdoor fields",
@@ -78,7 +78,7 @@ const tourStops = [
       "/Images/biz1.jpg",
       "/Images/biz.jpeg",
     ],
-    audioFile: "#",
+    audioFile: "",
     audioTitle: "Business School Tour Narration",
     facts: [
       "Programs: MBA, Bachelor's in Business Administration, Finance",
@@ -160,8 +160,16 @@ function loadTourStop(stopIndex) {
 
   // Update audio
   const audioElement = document.getElementById("tour-audio");
-  audioElement.src = stop.audioFile;
-  document.getElementById("audio-title").textContent = stop.audioTitle;
+  const audioInfo = document.getElementById("audio-title");
+  
+  if (stop.audioFile && stop.audioFile !== "") {
+    audioElement.src = stop.audioFile;
+    audioElement.style.display = "block";
+    audioInfo.textContent = stop.audioTitle;
+  } else {
+    audioElement.style.display = "none";
+    audioInfo.textContent = "Audio narration not available for this location";
+  }
 
   // Update quick facts
   const factsList = document.getElementById("quick-facts");
@@ -266,26 +274,42 @@ function goToStop(stopIndex) {
 // Initialize interactive map
 function initializeMap() {
   // Strathmore University coordinates (Nairobi, Kenya)
-  const campusCenter = [-1.3070, 36.8107];
+  const campusCenter = [-1.3095223341989337, 36.814028736977974];
 
-  map = L.map("campus-map").setView(campusCenter, 17);
+  map = L.map("campus-map").setView(campusCenter, 16);
 
   // Add tile layer (OpenStreetMap)
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors",
   }).addTo(map);
 
-  // Add markers for each tour stop
-  const markerColors = ["red", "blue", "green", "orange", "purple"];
+  // Custom marker colors for each building type
+  const markerColors = {
+    0: "#e74c3c", // Library - Red
+    1: "#3498db", // Student Center - Blue
+    2: "#2ecc71", // Management Science - Green
+    3: "#f39c12", // Sports Complex - Orange
+    4: "#9b59b6", // Business School - Purple
+  };
 
   tourStops.forEach((stop, index) => {
-    const marker = L.marker(stop.coordinates).addTo(map).bindPopup(`
-                <div class="popup-content">
-                    <h4>${stop.title}</h4>
-                    <p>${stop.description.substring(0, 100)}...</p>
-                    <button onclick="goToStop(${index})" class="popup-btn">View Tour Stop</button>
-                </div>
-            `);
+    // Create custom colored markers
+    const markerIcon = L.divIcon({
+      className: 'custom-marker',
+      html: `<div style="background-color: ${markerColors[index]}; width: 25px; height: 25px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`,
+      iconSize: [25, 25],
+      iconAnchor: [12, 12]
+    });
+
+    const marker = L.marker(stop.coordinates, { icon: markerIcon })
+      .addTo(map)
+      .bindPopup(`
+        <div class="popup-content" style="text-align: center; padding: 10px; min-width: 200px;">
+          <h4 style="margin: 0 0 10px 0; color: #2c3e50; font-size: 1.1rem;">${stop.title}</h4>
+          <p style="margin: 0 0 15px 0; color: #666; font-size: 0.9rem; line-height: 1.4;">${stop.description.substring(0, 100)}...</p>
+          <button onclick="goToStop(${index})" class="popup-btn" style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; transition: transform 0.2s ease;" onmouseover="this.style.transform='translateY(-1px)'" onmouseout="this.style.transform='translateY(0)'">View Tour Stop</button>
+        </div>
+      `);
 
     markers.push(marker);
 
@@ -294,6 +318,21 @@ function initializeMap() {
       goToStop(index);
     });
   });
+
+  // Add campus boundary or highlight area (optional)
+  const campusBounds = [
+    [-1.3115, 36.8080], // Southwest corner
+    [-1.3080, 36.8160]  // Northeast corner
+  ];
+
+  // Add a subtle campus area highlight
+  L.rectangle(campusBounds, {
+    color: "#1e3c72",
+    weight: 2,
+    opacity: 0.3,
+    fillColor: "#1e3c72",
+    fillOpacity: 0.1
+  }).addTo(map);
 }
 
 // Highlight specific marker on map
