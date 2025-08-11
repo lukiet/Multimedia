@@ -14,14 +14,15 @@ body {
 
 /* Header and Navigation */
 .header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
     padding: 1rem 0;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
 }
 
 .navbar {
@@ -31,6 +32,19 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-logo {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    border-radius: 5px;
 }
 
 .nav-brand h1 {
@@ -52,37 +66,61 @@ body {
 }
 
 .nav-link:hover {
-    color: #ffd700;
+    color: #87ceeb;
 }
 
 /* Hero Section */
 .hero {
     margin-top: 80px;
     padding: 4rem 2rem;
-    max-width: 1200px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
-    min-height: 500px;
+    min-height: 600px;
+    background-image: url('/Images/bg1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    background-color: #000000a1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+.hero > * {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: #2c3e50;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    color: #666;
+    color: #f8f9fa;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .cta-button {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -90,11 +128,12 @@ body {
     border-radius: 50px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 60, 114, 0.3);
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 6px 20px rgba(30, 60, 114, 0.4);
 }
 
 .hero-image img {
@@ -141,9 +180,9 @@ body {
 }
 
 .stop-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
-    border-color: #667eea;
+    border-color: #1e3c72;
 }
 
 .stop-btn:hover {
@@ -196,11 +235,11 @@ body {
 }
 
 .thumbnail.active {
-    border-color: #667eea;
+    border-color: #1e3c72;
 }
 
 .thumbnail:hover {
-    border-color: #764ba2;
+    border-color: #2a5298;
 }
 
 /* Info Panel */
@@ -256,7 +295,7 @@ body {
 .additional-info li {
     padding: 0.5rem 0;
     color: #666;
-    border-left: 3px solid #667eea;
+    border-left: 3px solid #1e3c72;
     padding-left: 1rem;
     margin-bottom: 0.5rem;
 }
@@ -273,7 +312,7 @@ body {
 }
 
 .nav-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
     border: none;
     padding: 0.8rem 1.5rem;
@@ -420,41 +459,283 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Navigation */
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+    
+    .nav-brand {
+        justify-content: center;
+    }
+    
+    .nav-brand h1 {
+        font-size: 1.2rem;
+    }
+    
+    .nav-logo {
+        height: 35px;
+        width: 35px;
+    }
+    
+    .nav-menu {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    /* Hero Section */
     .hero {
         grid-template-columns: 1fr;
         text-align: center;
-        margin-top: 100px;
+        margin-top: 120px;
+        padding: 2rem 1rem;
+        min-height: auto;
+        gap: 2rem;
     }
     
     .hero-content h2 {
         font-size: 2rem;
+        margin-bottom: 1rem;
     }
     
-    .tour-content {
-        grid-template-columns: 1fr;
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .cta-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .hero-image img {
+        height: 250px;
+    }
+    
+    /* Tour Section */
+    .tour-section {
+        padding: 0 1rem;
+    }
+    
+    .tour-controls h3 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
     }
     
     .stop-selector {
         flex-direction: column;
         align-items: center;
+        gap: 0.8rem;
+    }
+    
+    .stop-btn {
+        width: 250px;
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Tour Display */
+    .tour-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .image-gallery {
+        padding: 1.5rem;
+    }
+    
+    .main-image img {
+        height: 250px;
+    }
+    
+    .thumbnail {
+        width: 60px;
+        height: 45px;
+    }
+    
+    .info-panel {
+        padding: 1.5rem;
+    }
+    
+    .info-panel h4 {
+        font-size: 1.5rem;
+    }
+    
+    .info-panel p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Tour Navigation */
+    .tour-navigation {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .nav-btn {
+        width: 100%;
+        padding: 0.7rem;
+    }
+    
+    /* Map Section */
+    .map-section {
+        padding: 0 1rem;
+    }
+    
+    .map-container h3 {
+        font-size: 2rem;
+        padding: 1.5rem;
+    }
+    
+    #campus-map {
+        height: 300px;
+    }
+    
+    .map-legend {
+        padding: 1.5rem;
+    }
+    
+    .legend-item {
+        margin-bottom: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    /* About Section */
+    .about-section {
+        padding: 0 1rem;
+    }
+    
+    .about-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .about-content h3 {
+        font-size: 2rem;
+    }
+    
+    .about-content p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .features {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .feature {
+        padding: 1.5rem;
+    }
+    
+    .feature h4 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Tablet Responsive Design */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .navbar {
+        padding: 0 1.5rem;
+    }
+    
+    .hero {
+        padding: 3rem 1.5rem;
+        gap: 2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .tour-section, .map-section, .about-section {
+        padding: 0 1.5rem;
+    }
+    
+    .stop-selector {
+        gap: 0.8rem;
+    }
+    
+    .stop-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .nav-brand h1 {
+        font-size: 1rem;
+    }
+    
+    .nav-logo {
+        height: 30px;
+        width: 30px;
+    }
+    
+    .hero {
+        margin-top: 140px;
+        padding: 1.5rem 0.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+    
+    .tour-section, .map-section, .about-section {
+        padding: 0 0.5rem;
+    }
+    
+    .tour-controls h3 {
+        font-size: 1.8rem;
     }
     
     .stop-btn {
         width: 200px;
+        font-size: 0.85rem;
     }
     
-    .tour-navigation {
-        flex-direction: column;
-        gap: 1rem;
+    .image-gallery, .info-panel {
+        padding: 1rem;
     }
     
-    .navbar {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+    .main-image img {
+        height: 200px;
     }
     
-    .nav-menu {
-        gap: 1rem;
+    .info-panel h4 {
+        font-size: 1.3rem;
+    }
+    
+    .thumbnail {
+        width: 50px;
+        height: 38px;
+    }
+    
+    .about-content {
+        padding: 1.5rem 1rem;
+    }
+    
+    .about-content h3 {
+        font-size: 1.8rem;
+    }
+    
+    .map-container h3 {
+        font-size: 1.8rem;
+        padding: 1rem;
+    }
+    
+    #campus-map {
+        height: 250px;
     }
 }
