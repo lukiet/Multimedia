@@ -4,14 +4,14 @@ const tourStops = [
         title: "University Library",
         description: "Our state-of-the-art library features over 500,000 books, digital resources, study spaces, and research facilities. Open 24/7 during exam periods.",
         images: [
-            "/Images/lib.jpeg",
-            "/Images/lib_reading_room.jpeg",
-            "/Images/lib_study_area.jpeg"
+            "/Images/lib2.jpg",
+            "/Images/lib3.jpg",
+            "/Images/lib4.webp" 
         ],
         thumbnails: [
-            "/Images/lib1.jpeg",
-            "/Images/lib2.jpeg",
-            "/Images/lib3.jpeg"
+            "/Images/lib2.jpg",
+            "/Images/lib3.jpg",
+            "/Images/lib4.webp"
         ],
         audioFile: "#", // Placeholder for audio file
         audioTitle: "Library Tour Narration",
@@ -27,14 +27,14 @@ const tourStops = [
         title: "Student Center",
         description: "The heart of campus life featuring dining options, student services, meeting rooms, and recreational facilities. A hub for social and academic activities.",
         images: [
-            "https://via.placeholder.com/600x400/3498db/ffffff?text=Student+Center+Main",
-            "https://via.placeholder.com/600x400/2980b9/ffffff?text=Student+Center+Dining",
-            "https://via.placeholder.com/600x400/5dade2/ffffff?text=Student+Center+Lounge"
+            "/Images/stc.jpeg",
+            "/Images/stc1.jpeg",
+            "/Images/stc2.jpeg"
         ],
         thumbnails: [
-            "https://via.placeholder.com/100x75/3498db/ffffff?text=SC1",
-            "https://via.placeholder.com/100x75/2980b9/ffffff?text=SC2",
-            "https://via.placeholder.com/100x75/5dade2/ffffff?text=SC3"
+            "/Images/stc.jpeg",
+            "/Images/stc1.jpeg",
+            "/Images/stc2.jpeg"
         ],
         audioFile: "#",
         audioTitle: "Student Center Tour Narration",
